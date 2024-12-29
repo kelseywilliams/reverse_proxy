@@ -10,9 +10,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./dev.conf:/etc/nginx/nginx.conf:ro
-    #   - /etc/letsencrypt/live/kelseywilliams.co/privkey.pem:/etc/letsencrypt/live/kelseywilliams.co/privkey.pem:ro
-    #   - /etc/letsencrypt/live/kelseywilliams.co/fullchain.pem:/etc/letsencrypt/live/kelseywilliams.co/fullchain.pem:ro
+      - ./prod.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt/live/kelseywilliams.co/privkey.pem:/etc/letsencrypt/live/kelseywilliams.co/privkey.pem:ro
+      - /etc/letsencrypt/live/kelseywilliams.co/fullchain.pem:/etc/letsencrypt/live/kelseywilliams.co/fullchain.pem:ro
 
 
 
