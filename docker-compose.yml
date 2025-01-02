@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   rproxy:
-    image: nginx
+    image: alfg/nginx-rtmp
     restart: always
     networks:
       - site
