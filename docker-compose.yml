@@ -1,11 +1,12 @@
-version: "3.8"
-
 services:
   rproxy:
+    container_name: rproxy
     image: nginx
     restart: always
     networks:
-      - site
+      site:
+        aliases:
+            - mail.kelseywilliams.co
     ports:
       - "80:80"
       - "443:443"
@@ -14,6 +15,14 @@ services:
       - ./prod.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/live/kelseywilliams.co/privkey.pem:/certs/privkey.pem:ro
       - /etc/letsencrypt/live/kelseywilliams.co/fullchain.pem:/certs/fullchain.pem:ro
+
+    depends_on:
+        redis:
+            condition: service_healthy
+        home:
+            condition: service_healthy
+        mouse:
+            condition: service_healthy
 
 
 
