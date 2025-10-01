@@ -5,8 +5,6 @@ services:
     restart: always
     networks:
       site:
-        aliases:
-            - mail.kelseywilliams.co
     ports:
       - "80:80"
       - "443:443"
@@ -16,14 +14,10 @@ services:
       - /etc/letsencrypt/live/kelseywilliams.co/privkey.pem:/certs/privkey.pem:ro
       - /etc/letsencrypt/live/kelseywilliams.co/fullchain.pem:/certs/fullchain.pem:ro
 
-    depends_on:
-        redis:
-            condition: service_healthy
-        home:
-            condition: service_healthy
-        mouse:
-            condition: service_healthy
-
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost"]
+        timeout: 3s
+        retries: 3
 
 
 networks:
