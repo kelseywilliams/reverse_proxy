@@ -1,6 +1,6 @@
 services:
   rproxy:
-    container_name: rproxy
+    container_name: proxy
     image: nginx
     restart: always
     networks:
@@ -10,8 +10,8 @@ services:
       - "443:443"
     volumes:
       - /root/home/certbot:/certbot
-      - ./logs/:/logs/
-      - ./prod.conf:/etc/nginx/nginx.conf
+      - ./logs/:/etc/nginx/logs/
+      - ./dev.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/live/kelseywilliams.co/privkey.pem:/certs/home/privkey.pem:ro
       - /etc/letsencrypt/live/kelseywilliams.co/fullchain.pem:/certs/home/fullchain.pem:ro
       - /etc/letsencrypt/live/api.kelseywilliams.co/privkey.pem:/certs/api/privkey.pem:ro
